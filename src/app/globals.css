@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-surface-950: #0a0c10;
+  --color-surface-900: #0f1218;
+  --color-accent: #22d3ee;
+  --color-accent-muted: #0891b2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-surface-950 text-zinc-300 antialiased;
+}
+
+/* Subtle selection */
+::selection {
+  @apply bg-accent/20 text-accent;
+}
+
+/* Section container */
+.section-container {
+  @apply mx-auto max-w-4xl px-6 py-16 sm:px-8;
+}
+
+/* Prose for long-form text */
+.prose-custom {
+  @apply text-zinc-400 leading-relaxed;
+}
+
+.prose-custom strong {
+  @apply text-zinc-200 font-medium;
+}
+
+.prose-custom a {
+  @apply text-accent hover:text-accent-muted transition-colors underline underline-offset-2;
+}
+
+/* Button hover lift */
+.btn-lift {
+  @apply transition-transform duration-200 hover:-translate-y-0.5;
+}
+
+/* Subtle section gradient background */
+.section-gradient {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(34, 211, 238, 0.02) 50%,
+    transparent 100%
+  );
+}
+
+/* Card glow transition (use with Tailwind shadow-glow-* on hover) */
+.card-glow {
+  @apply transition-all duration-300 ease-out;
+}
