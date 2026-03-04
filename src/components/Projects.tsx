@@ -51,7 +51,7 @@ export default function Projects() {
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
         {projects.map((project, i) => (
           <Reveal key={project.title} delay={i * 60}>
-            <article className="group rounded-lg border border-border/50 bg-surface-900/50 p-6 transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5">
+            <article className="group rounded-lg border border-border/50 bg-surface-900/50 p-6 card-hover hover:border-accent/30 hover:shadow-glow-cyan-sm">
               <p className="text-accent/90 font-mono text-xs mb-1">{project.context}</p>
               <h3 className="text-white font-semibold mb-2 group-hover:text-accent transition-colors">{project.title}</h3>
               <p className="text-zinc-500 text-xs font-mono mb-4">{project.stack}</p>

@@ -156,7 +156,7 @@ export default function InfrastructureProjects() {
           return (
             <Reveal key={project.id} delay={i * 80}>
               <article
-                className={`group rounded-xl border bg-surface-900/50 p-6 sm:p-8 card-glow ${styles.border} ${styles.hoverBorder} ${styles.glow} hover:bg-surface-800/50`}
+                className={`group rounded-xl border bg-surface-900/50 p-6 sm:p-8 card-glow card-hover ${styles.border} ${styles.hoverBorder} ${styles.glow} hover:bg-surface-800/50`}
               >
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
                   <h3 className="text-lg font-semibold text-white">{project.title}</h3>

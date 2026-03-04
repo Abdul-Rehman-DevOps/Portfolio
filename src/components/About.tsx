@@ -4,7 +4,7 @@ import Reveal from './Reveal';
 
 export default function About() {
   return (
-    <section id="about" className="section-container border-t border-border/50" aria-labelledby="about-heading">
+    <section id="about" className="section-container" aria-labelledby="about-heading">
       <Reveal>
         <h2 id="about-heading" className="text-2xl font-semibold text-white mb-6 font-mono tracking-tight">
           About
@@ -21,13 +21,13 @@ export default function About() {
         </Reveal>
         <Reveal delay={100}>
           <p>
-            I build end-to-end CI/CD pipelines (GitHub Actions, Jenkins,
-            cloud-native tooling), deploy production workloads on Kubernetes,
-            Docker, and Docker Swarm, and harden environments with proper IAM,
-            network security, and access control. At IKONIC I run Laravel and
-            React/Python stacks—including GPU-based AI applications—on EKS and AKS;
-            at Forbmax I architected DevSecOps pipelines with SonarQube, Trivy,
-            OWASP, and GitOps via ArgoCD.
+            I build end-to-end CI/CD pipelines (GitHub Actions, Jenkins, AWS CodePipeline),
+            deploy production workloads on Kubernetes, Docker, and Docker Swarm, and
+            harden environments with IAM, network security, and access control. At
+            Funavry I design scalable Kubernetes on AWS, GitOps with ArgoCD and FluxCD,
+            and Web3/blockchain infrastructure; previously at IKONIC I ran Laravel and
+            React/Python AI on EKS/AKS, and at Forbmax I architected DevSecOps pipelines
+            with SonarQube, Trivy, OWASP, and ArgoCD.
           </p>
         </Reveal>
         <Reveal delay={150}>

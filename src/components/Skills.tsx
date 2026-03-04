@@ -26,7 +26,7 @@ const skillCategories = [
   {
     title: 'CI/CD & Security',
     description: 'Pipelines and security in the loop.',
-    items: ['Jenkins, GitHub Actions, GitLab CI', 'Azure DevOps, CodePipeline', 'ArgoCD, GitOps', 'SonarQube, Trivy, OWASP'],
+    items: ['Jenkins, GitHub Actions, GitLab CI', 'Azure DevOps, CodePipeline', 'ArgoCD, GitOps','fluxcd', 'SonarQube, Trivy, OWASP'],
   },
 ];
 

@@ -1,7 +1,14 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import CursorFollower from '@/components/CursorFollower';
 import './globals.css';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,6 +24,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://abdulrehman.dev'),
+  icons: {
+    icon: '/profile.png',
+    shortcut: '/profile.png',
+    apple: '/profile.png',
+  },
   title: 'Abdul Rehman | DevOps & Cloud Engineer',
   description:
     'DevOps and Cloud Engineer specializing in multi-cloud infrastructure, CI/CD, Kubernetes, AI/ML deployment, and secure, scalable systems. AWS, Azure, EKS, AKS.',
@@ -54,10 +66,27 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable}`}
+      style={{ width: '100%' }}
     >
-      <body className="min-h-screen font-sans">
-        {children}
+      <body className="min-h-screen font-sans w-full overflow-x-hidden relative" style={{ width: '100%', minWidth: 0 }}>
+        {/* Full-page blockchain background — blockchain.avif in public/ */}
+        <div
+          className="fixed inset-0 z-0 pointer-events-none"
+          aria-hidden
+          style={{
+            backgroundImage: 'url("/blockchain.avif")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            opacity: 0.4,
+          }}
+        />
+        <div className="fixed inset-0 z-0 pointer-events-none bg-surface-950/55" aria-hidden />
+        <div className="relative z-10" style={{ width: '100%', minWidth: 0, maxWidth: '100vw', overflowX: 'hidden' }}>
+          {children}
+        </div>
         <WhatsAppButton />
+        <CursorFollower />
       </body>
     </html>
   );
