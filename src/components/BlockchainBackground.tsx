@@ -1,6 +1,7 @@
+import ThemeAmbientVideo from '@/components/ThemeAmbientVideo';
+
 /**
- * Zero-runtime decorative layer: inline SVG (node–link) + 8px CSS grid.
- * No raster assets, no JS animation. Scrim keeps body text high-contrast.
+ * Decorative layer: optional ambient video (your reference), SVG node–link, grid, scrim.
  */
 export default function BlockchainBackground() {
   return (
@@ -10,6 +11,18 @@ export default function BlockchainBackground() {
       <div
         className="absolute inset-0 bg-gradient-to-b from-slate-200/35 via-transparent to-slate-100
           dark:from-canvas-elevated/35 dark:via-transparent dark:to-canvas"
+      />
+
+      {/* Reference video — subtle colour & motion (dark + motion OK only) */}
+      <ThemeAmbientVideo />
+
+      {/* Cinematic wash — teal / violet (matches typical screen-recording UIs) */}
+      <div
+        className="absolute inset-0 hidden opacity-25 dark:block"
+        style={{
+          background:
+            'radial-gradient(ellipse 90% 70% at 20% 10%, rgba(56, 189, 248, 0.06), transparent 55%), radial-gradient(ellipse 80% 60% at 85% 90%, rgba(139, 92, 246, 0.05), transparent 50%)',
+        }}
       />
 
       {/* Light: slate grid */}
@@ -23,7 +36,7 @@ export default function BlockchainBackground() {
       />
       {/* Dark: cyan-tinged grid (subtle) */}
       <div
-        className="absolute inset-0 hidden dark:block opacity-[0.45]"
+        className="absolute inset-0 hidden dark:block opacity-[0.28]"
         style={{
           backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
             linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px)`,
@@ -84,7 +97,7 @@ export default function BlockchainBackground() {
         ))}
       </svg>
 
-      <div className="absolute inset-0 bg-slate-50/[0.86] dark:bg-canvas/[0.88]" />
+      <div className="absolute inset-0 bg-slate-50/[0.86] dark:bg-canvas/[0.62]" />
     </div>
   );
 }

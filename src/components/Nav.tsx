@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import ThemeToggle from './ThemeToggle';
 import { resume } from '@/lib/site';
 
 const navItems = [
@@ -28,7 +27,6 @@ export default function Nav() {
           >
             AR
           </Link>
-          <ThemeToggle />
         </div>
         <ul className="flex flex-wrap items-center justify-end gap-x-2.5 gap-y-2 sm:gap-x-3.5 min-w-0 shrink">
           <li>

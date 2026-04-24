@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   },
 };
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t!=='light');}catch(e){document.documentElement.classList.add('dark');}})();`;
+const themeInitScript = `(function(){document.documentElement.classList.add('dark');})();`;
 
 export default function RootLayout({
   children,
