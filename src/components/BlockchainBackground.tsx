@@ -1,7 +1,7 @@
-import ThemeAmbientVideo from '@/components/ThemeAmbientVideo';
+import ThemeLoopAnimation from '@/components/ThemeLoopAnimation';
 
 /**
- * Decorative layer: optional ambient video (your reference), SVG node–link, grid, scrim.
+ * Decorative layer: looping background video, SVG node graph, grid, scrim.
  */
 export default function BlockchainBackground() {
   return (
@@ -13,12 +13,12 @@ export default function BlockchainBackground() {
           dark:from-canvas-elevated/35 dark:via-transparent dark:to-canvas"
       />
 
-      {/* Reference video — subtle colour & motion (dark + motion OK only) */}
-      <ThemeAmbientVideo />
+      {/* Looping background animation — full-bleed */}
+      <ThemeLoopAnimation />
 
-      {/* Cinematic wash — teal / violet (matches typical screen-recording UIs) */}
+      {/* Cinematic wash — teal / violet */}
       <div
-        className="absolute inset-0 hidden opacity-25 dark:block"
+        className="absolute inset-0 hidden opacity-20 dark:block"
         style={{
           background:
             'radial-gradient(ellipse 90% 70% at 20% 10%, rgba(56, 189, 248, 0.06), transparent 55%), radial-gradient(ellipse 80% 60% at 85% 90%, rgba(139, 92, 246, 0.05), transparent 50%)',
@@ -36,7 +36,7 @@ export default function BlockchainBackground() {
       />
       {/* Dark: cyan-tinged grid (subtle) */}
       <div
-        className="absolute inset-0 hidden dark:block opacity-[0.28]"
+        className="absolute inset-0 hidden dark:block opacity-[0.22]"
         style={{
           backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
             linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px)`,
@@ -97,7 +97,7 @@ export default function BlockchainBackground() {
         ))}
       </svg>
 
-      <div className="absolute inset-0 bg-slate-50/[0.86] dark:bg-canvas/[0.62]" />
+      <div className="absolute inset-0 bg-slate-50/[0.86] dark:bg-canvas/[0.55]" />
     </div>
   );
 }
