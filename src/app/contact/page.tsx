@@ -20,27 +20,23 @@ export default function ContactPage() {
     window.location.href = mailto;
   }
 
-  const inputBase =
-    'w-full rounded-lg border border-border bg-surface-800/50 px-4 py-3 text-zinc-200 placeholder-zinc-500 outline-none transition-all duration-200 focus:border-accent focus:ring-2 focus:ring-accent/20';
-
   return (
     <>
       <Nav />
       <main className="min-h-screen pt-24 pb-32" role="main">
         <div className="section-container">
           <div className="mx-auto max-w-2xl animate-fade-in-up">
-            <h1 className="text-3xl font-semibold text-white mb-2 font-mono tracking-tight">
-              Contact
-            </h1>
-            <p className="text-zinc-500 mb-10">
-              Get in touch for senior DevOps, cloud architect, or AI infrastructure roles.
+            <h1 className="font-display text-3xl font-semibold text-heading mb-2 tracking-tight">Contact</h1>
+            <p className="text-subtle mb-10 text-pretty max-w-prose leading-relaxed">
+              DevSecOps, cloud, and platform engineering. Open to senior IC and lead roles; remote or hybrid where
+              it fits.
             </p>
 
-            <div className="mb-12 rounded-xl border border-border/50 bg-surface-900/30 p-6 sm:p-8">
-              <h2 className="text-lg font-medium text-white mb-6">Send a message</h2>
+            <div className="mb-12 card-surface p-6 sm:p-8">
+              <h2 className="text-lg font-medium text-heading mb-6">Send a message</h2>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-zinc-400">
+                  <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-subtle">
                     Name
                   </label>
                   <input
@@ -49,12 +45,12 @@ export default function ContactPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name"
-                    className={inputBase}
+                    className="form-input"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-zinc-400">
+                  <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-subtle">
                     Email
                   </label>
                   <input
@@ -63,12 +59,12 @@ export default function ContactPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className={inputBase}
+                    className="form-input"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-zinc-400">
+                  <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-subtle">
                     Subject
                   </label>
                   <input
@@ -77,11 +73,11 @@ export default function ContactPage() {
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                     placeholder="e.g. DevOps opportunity"
-                    className={inputBase}
+                    className="form-input"
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-zinc-400">
+                  <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-subtle">
                     Message
                   </label>
                   <textarea
@@ -90,20 +86,23 @@ export default function ContactPage() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Your message..."
-                    className={`${inputBase} resize-y min-h-[120px]`}
+                    className="form-input resize-y min-h-[120px]"
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-accent px-4 py-3 font-medium text-surface-950 transition-all duration-200 hover:bg-accent-muted focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface-950"
+                  className="w-full rounded-lg bg-brand dark:bg-accent px-4 py-3 font-medium text-white dark:text-canvas transition-colors duration-200 hover:bg-brand/90 dark:hover:bg-accent-muted focus:outline-none focus:ring-2 focus:ring-brand/40 focus:ring-offset-2 focus:ring-offset-slate-100 dark:focus:ring-accent/40 dark:focus:ring-offset-canvas"
                 >
                   Open in email
                 </button>
               </form>
-              <p className="mt-4 text-xs text-zinc-500">
+              <p className="mt-4 text-xs text-subtle">
                 Submitting opens your default email client with the message pre-filled to{' '}
-                <a href={`mailto:${EMAIL}`} className="text-accent hover:underline">
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="text-brand hover:underline dark:text-accent dark:hover:text-accent-muted"
+                >
                   {EMAIL}
                 </a>
                 .
@@ -113,13 +112,13 @@ export default function ContactPage() {
             <div className="flex flex-wrap gap-6 text-sm">
               <a
                 href="mailto:abdulrehman.devops@gmail.com"
-                className="text-accent hover:text-accent-muted transition-colors"
+                className="text-brand dark:text-accent hover:text-brand/80 dark:hover:text-accent-muted transition-colors"
               >
                 abdulrehman.devops@gmail.com
               </a>
               <a
                 href="tel:+923039692131"
-                className="text-accent hover:text-accent-muted transition-colors"
+                className="text-brand dark:text-accent hover:text-brand/80 dark:hover:text-accent-muted transition-colors"
               >
                 0303-9692131
               </a>
@@ -127,11 +126,11 @@ export default function ContactPage() {
                 href="https://www.linkedin.com/in/abdul-rehman-a197a32b5/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent hover:text-accent-muted transition-colors"
+                className="text-brand dark:text-accent hover:text-brand/80 dark:hover:text-accent-muted transition-colors"
               >
                 LinkedIn
               </a>
-              <Link href="/" className="text-zinc-400 hover:text-accent transition-colors">
+              <Link href="/" className="text-subtle hover:text-slate-900 dark:hover:text-zinc-200 transition-colors">
                 ← Back home
               </Link>
             </div>

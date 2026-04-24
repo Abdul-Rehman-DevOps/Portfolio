@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact | Abdul Rehman',
-  description: 'Get in touch with Abdul Rehman for senior DevOps, cloud architect, and AI infrastructure roles.',
+  title: 'Contact',
+  description:
+    'Contact Abdul Rehman for senior DevSecOps, cloud, and platform engineering roles. ChainGPT, Funavry, and consulting.',
 };
 
 export default function ContactLayout({

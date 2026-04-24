@@ -82,7 +82,7 @@ export default function CursorFollower() {
         return (
           <div
             key={i}
-            className="absolute rounded-full bg-white transition-opacity duration-150"
+            className="absolute rounded-full bg-slate-800/90 transition-opacity duration-150 dark:bg-white/90"
             style={{
               left: p.x,
               top: p.y,
@@ -92,8 +92,8 @@ export default function CursorFollower() {
               marginTop: -size / 2,
               opacity: visible ? opacity : 0,
               boxShadow: isHead
-                ? '0 0 12px 2px rgba(34, 211, 238, 0.4), 0 0 6px rgba(255,255,255,0.6)'
-                : '0 0 4px rgba(255,255,255,0.3)',
+                ? '0 0 10px 2px rgba(91, 143, 168, 0.35), 0 0 4px rgba(15, 23, 42, 0.4)'
+                : '0 0 3px rgba(15, 23, 42, 0.25)',
             }}
           />
         );

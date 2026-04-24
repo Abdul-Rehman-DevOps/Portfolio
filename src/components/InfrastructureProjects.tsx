@@ -1,6 +1,7 @@
 'use client';
 
 import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
 
 const projects = [
   {
@@ -87,30 +88,22 @@ const projects = [
 
 const accentClasses = {
   cloud: {
-    text: 'text-domain-cloud',
-    border: 'border-domain-cloud/30',
-    hoverBorder: 'hover:border-domain-cloud/50',
+    bar: 'border-l-[3px] border-l-sky-500/45 dark:border-l-cyan-400/35',
     glow: 'hover:shadow-glow-cyan',
     label: 'text-domain-cloud',
   },
   ai: {
-    text: 'text-domain-ai',
-    border: 'border-domain-ai/30',
-    hoverBorder: 'hover:border-domain-ai/50',
+    bar: 'border-l-[3px] border-l-violet-400/45 dark:border-l-violet-400/30',
     glow: 'hover:shadow-glow-purple',
     label: 'text-domain-ai',
   },
   blockchain: {
-    text: 'text-domain-blockchain',
-    border: 'border-domain-blockchain/30',
-    hoverBorder: 'hover:border-domain-blockchain/50',
+    bar: 'border-l-[3px] border-l-emerald-500/40 dark:border-l-emerald-400/30',
     glow: 'hover:shadow-glow-green',
     label: 'text-domain-blockchain',
   },
   security: {
-    text: 'text-domain-security',
-    border: 'border-domain-security/30',
-    hoverBorder: 'hover:border-domain-security/50',
+    bar: 'border-l-[3px] border-l-amber-500/40 dark:border-l-amber-400/30',
     glow: 'hover:shadow-glow-orange',
     label: 'text-domain-security',
   },
@@ -119,8 +112,8 @@ const accentClasses = {
 function TerraformBlock({ label, content }: { label: string; content: string }) {
   return (
     <div className="mt-3">
-      <span className="font-mono text-xs text-zinc-500">{label}</span>
-      <p className="text-zinc-400 text-sm leading-relaxed mt-0.5">{content}</p>
+      <span className="font-mono text-xs text-subtle">{label}</span>
+      <p className="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed mt-0.5">{content}</p>
     </div>
   );
 }
@@ -129,57 +122,54 @@ export default function InfrastructureProjects() {
   return (
     <section
       id="infrastructure"
-      className="section-container border-t border-border/50 section-gradient relative overflow-hidden"
+      className="section-container section-rule section-gradient relative overflow-hidden"
       aria-labelledby="infrastructure-heading"
     >
-      {/* Subtle animated gradient overlay */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-domain-cloud/10 via-domain-ai/5 to-domain-blockchain/10 animate-gradient-shift"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-sky-100/25 via-violet-50/15 to-emerald-50/20
+          dark:from-domain-cloud/[0.07] dark:via-domain-ai/[0.04] dark:to-domain-blockchain/[0.06] animate-gradient-shift"
         aria-hidden
       />
       <div className="relative z-10">
       <Reveal>
-        <h2
+        <SectionHeader
           id="infrastructure-heading"
-          className="text-2xl font-semibold text-white mb-2 font-mono tracking-tight"
-        >
-          Infrastructure & DevOps Projects
-        </h2>
-        <p className="text-zinc-500 text-sm mb-10 max-w-xl">
-          Terraform-driven platforms: modules, remote state, env separation, and security by default.
-        </p>
+          title="Infrastructure & DevOps projects"
+          lead="Terraform-first patterns: modules, remote state, environment boundaries, and security as default constraints."
+          className="mb-8 sm:mb-10"
+        />
       </Reveal>
 
-      <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-1">
+      <div className="grid gap-5 sm:gap-6 sm:grid-cols-1 lg:grid-cols-1">
         {projects.map((project, i) => {
           const styles = accentClasses[project.accent as keyof typeof accentClasses];
           return (
             <Reveal key={project.id} delay={i * 80}>
               <article
-                className={`group rounded-xl border bg-surface-900/50 p-6 sm:p-8 card-glow card-hover ${styles.border} ${styles.hoverBorder} ${styles.glow} hover:bg-surface-800/50`}
+                className={`group card-surface p-6 sm:p-7 pl-5 sm:pl-6 card-glow card-hover ${styles.bar} ${styles.glow} transition-colors duration-200`}
               >
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
-                  <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+                  <h3 className="text-lg font-semibold text-heading font-display">{project.title}</h3>
                   <span className={`font-mono text-xs ${styles.label}`}>{project.stack}</span>
                 </div>
 
                 <div className="space-y-2 text-sm">
                   <div>
-                    <span className="font-mono text-xs text-zinc-500">Problem</span>
-                    <p className="text-zinc-400 leading-relaxed mt-0.5">{project.problem}</p>
+                    <span className="font-mono text-xs text-subtle">Problem</span>
+                    <p className="text-slate-600 dark:text-zinc-400 leading-relaxed mt-0.5">{project.problem}</p>
                   </div>
                   <div>
-                    <span className="font-mono text-xs text-zinc-500">Architecture</span>
-                    <p className="text-zinc-400 leading-relaxed mt-0.5">{project.architecture}</p>
+                    <span className="font-mono text-xs text-subtle">Architecture</span>
+                    <p className="text-slate-600 dark:text-zinc-400 leading-relaxed mt-0.5">{project.architecture}</p>
                   </div>
                   <TerraformBlock label="Terraform" content={project.terraform} />
                   <div>
-                    <span className="font-mono text-xs text-zinc-500">Security</span>
-                    <p className="text-zinc-400 leading-relaxed mt-0.5">{project.security}</p>
+                    <span className="font-mono text-xs text-subtle">Security</span>
+                    <p className="text-slate-600 dark:text-zinc-400 leading-relaxed mt-0.5">{project.security}</p>
                   </div>
                   <div>
                     <span className={`font-mono text-xs ${styles.label}`}>Impact</span>
-                    <p className="text-zinc-300 leading-relaxed mt-0.5">{project.impact}</p>
+                    <p className="text-slate-700 dark:text-zinc-300 leading-relaxed mt-0.5">{project.impact}</p>
                   </div>
                 </div>
               </article>

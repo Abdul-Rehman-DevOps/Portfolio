@@ -1,24 +1,34 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import Script from 'next/script';
+import { Inter, JetBrains_Mono, Sora } from 'next/font/google';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import CursorFollower from '@/components/CursorFollower';
+import BlockchainBackground from '@/components/BlockchainBackground';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import './globals.css';
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  themeColor: '#0B0F19',
 };
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist-sans',
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const sora = Sora({
+  subsets: ['latin'],
+  variable: '--font-display',
   display: 'swap',
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -29,10 +39,14 @@ export const metadata: Metadata = {
     shortcut: '/profile.png',
     apple: '/profile.png',
   },
-  title: 'Abdul Rehman | DevOps & Cloud Engineer',
+  title: {
+    default: 'Abdul Rehman | DevSecOps & Cloud Engineer',
+    template: '%s | Abdul Rehman',
+  },
   description:
-    'DevOps and Cloud Engineer specializing in multi-cloud infrastructure, CI/CD, Kubernetes, AI/ML deployment, and secure, scalable systems. AWS, Azure, EKS, AKS.',
+    'DevSecOps and cloud engineer: multi-cloud infrastructure, secure CI/CD, Kubernetes, GitOps, AI/Web3-adjacent platforms. AWS, Azure, EKS, AKS.',
   keywords: [
+    'DevSecOps',
     'DevOps',
     'Cloud Engineer',
     'Kubernetes',
@@ -40,22 +54,25 @@ export const metadata: Metadata = {
     'Azure',
     'CI/CD',
     'Infrastructure',
-    'DevSecOps',
+    'Web3',
     'MLOps',
   ],
   authors: [{ name: 'Abdul Rehman', url: 'https://www.linkedin.com/in/abdul-rehman-a197a32b5/' }],
   openGraph: {
-    title: 'Abdul Rehman | DevOps & Cloud Engineer',
+    title: 'Abdul Rehman | DevSecOps & Cloud Engineer',
     description:
-      'DevOps and Cloud Engineer. Multi-cloud, Kubernetes, CI/CD, AI infrastructure. Building reliable systems.',
+      'Multi-cloud platforms, Kubernetes, secure delivery, and automation. Building reliable systems at ChainGPT and Funavry.',
     type: 'website',
+    locale: 'en_US',
   },
-  robots: 'index, follow',
+  robots: { index: true, follow: true },
   twitter: {
     card: 'summary_large_image',
-    title: 'Abdul Rehman | DevOps & Cloud Engineer',
+    title: 'Abdul Rehman | DevSecOps & Cloud Engineer',
   },
 };
+
+const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t!=='light');}catch(e){document.documentElement.classList.add('dark');}})();`;
 
 export default function RootLayout({
   children,
@@ -65,28 +82,25 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} dark`}
+      suppressHydrationWarning
       style={{ width: '100%' }}
     >
-      <body className="min-h-screen font-sans w-full overflow-x-hidden relative" style={{ width: '100%', minWidth: 0 }}>
-        {/* Full-page blockchain background — blockchain.avif in public/ */}
-        <div
-          className="fixed inset-0 z-0 pointer-events-none"
-          aria-hidden
-          style={{
-            backgroundImage: 'url("/blockchain.avif")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            opacity: 0.4,
-          }}
-        />
-        <div className="fixed inset-0 z-0 pointer-events-none bg-surface-950/55" aria-hidden />
-        <div className="relative z-10" style={{ width: '100%', minWidth: 0, maxWidth: '100vw', overflowX: 'hidden' }}>
-          {children}
-        </div>
-        <WhatsAppButton />
-        <CursorFollower />
+      <body style={{ width: '100%', minWidth: 0 }} className="relative">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
+        <ThemeProvider>
+          <BlockchainBackground />
+          <div
+            className="relative z-10 min-w-0 w-full"
+            style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+          >
+            {children}
+          </div>
+          <WhatsAppButton />
+          <CursorFollower />
+        </ThemeProvider>
       </body>
     </html>
   );

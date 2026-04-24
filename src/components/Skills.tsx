@@ -1,6 +1,7 @@
 'use client';
 
 import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
 
 const skillCategories = [
   {
@@ -11,50 +12,70 @@ const skillCategories = [
   {
     title: 'DevOps & Orchestration',
     description: 'Production-grade infrastructure patterns.',
-    items: ['Kubernetes & Docker at scale', 'Helm, Ingress (Nginx, Traefik)', 'Prometheus, Grafana, CloudWatch', 'ELK Stack, Zabbix'],
+    items: [
+      'Kubernetes & Docker at scale',
+      'Helm, Ingress (Nginx, Traefik)',
+      'Prometheus, Grafana, CloudWatch',
+      'ELK Stack, Zabbix',
+    ],
   },
   {
     title: 'AI/ML Ops',
     description: 'Model deployment and inference infrastructure.',
-    items: ['GPU workloads on EKS & AKS', 'Python AI apps & model serving', 'Containerized inference pipelines', 'ML observability & scaling'],
+    items: [
+      'GPU workloads on EKS & AKS',
+      'Python AI apps & model serving',
+      'Containerized inference pipelines',
+      'ML observability & scaling',
+    ],
   },
   {
     title: 'Blockchain Infrastructure',
     description: 'Nodes, RPC, and data pipelines.',
-    items: ['Node & RPC high availability', 'Backup & secure key handling', 'API gateways & rate limiting', 'Indexing & sync pipelines'],
+    items: [
+      'Node & RPC high availability',
+      'Backup & secure key handling',
+      'API gateways & rate limiting',
+      'Indexing & sync pipelines',
+    ],
   },
   {
     title: 'CI/CD & Security',
     description: 'Pipelines and security in the loop.',
-    items: ['Jenkins, GitHub Actions, GitLab CI', 'Azure DevOps, CodePipeline', 'ArgoCD, GitOps','fluxcd', 'SonarQube, Trivy, OWASP'],
+    items: [
+      'Jenkins, GitHub Actions, GitLab CI',
+      'Azure DevOps, CodePipeline',
+      'ArgoCD, GitOps, FluxCD',
+      'SonarQube, Trivy, OWASP',
+    ],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-container border-t border-border/50">
+    <section id="skills" className="section-container section-rule">
       <Reveal>
-        <h2 className="text-2xl font-semibold text-white mb-2 font-mono tracking-tight">
-          Platforms & experience
-        </h2>
-        <p className="text-zinc-500 text-sm mb-10 max-w-xl">
-          Clouds, DevOps, AI/ML Ops, blockchain infra, and CI/CD—high-level experience across domains.
-        </p>
+        <SectionHeader
+          id="skills-heading"
+          title="Platforms & experience"
+          lead="Cloud, DevOps, AI/ML Ops, blockchain, and delivery—broad, with depth where production demands it."
+          className="mb-8 sm:mb-10"
+        />
       </Reveal>
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {skillCategories.map((category, i) => (
-          <Reveal key={category.title} delay={i * 80}>
-            <article className="rounded-lg border border-border/50 bg-surface-900/50 p-6 transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5">
-              <h3 className="text-accent font-mono text-sm font-medium mb-1">
+          <Reveal key={category.title} delay={i * 50}>
+            <article className="h-full card-surface p-5 sm:p-6">
+              <h3 className="text-brand/95 dark:text-accent/95 font-mono text-sm font-medium mb-0.5">
                 {category.title}
               </h3>
               {category.description && (
-                <p className="text-zinc-500 text-xs mb-4">{category.description}</p>
+                <p className="text-subtle text-xs mb-3 leading-relaxed">{category.description}</p>
               )}
-              <ul className="space-y-2 text-zinc-400 text-sm">
+              <ul className="space-y-1.5 text-slate-600 dark:text-zinc-400 text-sm leading-relaxed">
                 {category.items.map((item) => (
                   <li key={item} className="flex gap-2">
-                    <span className="text-accent/60 shrink-0">·</span>
+                    <span className="text-brand/35 dark:text-accent/40 shrink-0">·</span>
                     <span>{item}</span>
                   </li>
                 ))}

@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Cross-browser baseline */
+/*
+  Design tokens (8px spacing: use space-2 = 8px, space-4 = 16px, etc.)
+  Light: optional via html:not(.dark)
+  Dark (default class on <html>): canvas #0B0F19, elevated #0F172A
+*/
+
 *,
 *::before,
 *::after {
@@ -10,10 +15,18 @@
 }
 
 :root {
-  --color-surface-950: #080a0e;
-  --color-surface-900: #0c0f14;
-  --color-accent: #22d3ee;
-  --color-accent-muted: #0891b2;
+  --color-canvas: #0b0f19;
+  --color-canvas-elevated: #0f172a;
+  --color-accent: #5b8fa8;
+  --color-accent-muted: #4a7a90;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  color-scheme: light;
 }
 
 html {
@@ -21,6 +34,7 @@ html {
   max-width: 100vw;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
 }
 
@@ -30,69 +44,119 @@ html {
   }
 }
 
-body {
-  @apply text-zinc-300 antialiased;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(12, 15, 20, 0.95) 0%, transparent 50%),
-    linear-gradient(180deg, #080a0e 0%, #06080b 100%);
-  background-color: #080a0e;
-  width: 100%;
-  max-width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
+@layer base {
+  body {
+    @apply min-h-screen w-full font-sans antialiased overflow-x-hidden m-0 p-0;
+    @apply bg-slate-100 text-slate-800;
+    @apply dark:bg-canvas dark:text-zinc-300;
+  }
 }
 
-/* Subtle selection */
 ::selection {
-  @apply bg-accent/20 text-accent;
+  @apply bg-brand/15 text-slate-900;
+  @apply dark:bg-accent/20 dark:text-zinc-100;
 }
 
-/* Section container */
-.section-container {
-  @apply mx-auto max-w-4xl w-full px-4 py-12 sm:px-6 sm:py-16 md:px-8;
-  min-width: 0;
+@layer components {
+  .section-container {
+    @apply mx-auto max-w-4xl w-full min-w-0 px-4 py-14 sm:px-6 sm:py-16 md:px-8 md:py-20;
+  }
+
+  .section-rule {
+    @apply border-t border-slate-200/90 dark:border-border/40;
+  }
+
+  .section-gradient {
+    background: linear-gradient(180deg, transparent 0%, rgba(91, 143, 168, 0.03) 50%, transparent 100%);
+  }
+
+  html:not(.dark) .section-gradient {
+    background: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.04) 50%, transparent 100%);
+  }
+
+  /* Cards — light glass, dark subtle panel */
+  .card-surface {
+    @apply rounded-lg border border-slate-200/90 bg-white/90 shadow-sm backdrop-blur-[2px] transition-all duration-200;
+    @apply dark:border-border/40 dark:bg-surface-900/30 dark:shadow-none dark:backdrop-blur-sm;
+  }
+
+  .card-surface:hover {
+    @apply border-slate-300/80 bg-white dark:border-border/55 dark:bg-surface-900/50;
+  }
+
+  .text-heading {
+    @apply text-slate-900 dark:text-zinc-50;
+  }
+
+  .text-subtle {
+    @apply text-slate-600 dark:text-zinc-500;
+  }
+
+  .text-body {
+    @apply text-slate-700 dark:text-zinc-300;
+  }
+
+  .nav-glass {
+    @apply border-b border-slate-200/90 bg-white/80 backdrop-blur-md;
+    @apply dark:border-border/30 dark:bg-surface-950/80 dark:backdrop-blur-md;
+  }
+
+  .prose-custom {
+    @apply text-slate-600 leading-relaxed dark:text-zinc-400;
+  }
+
+  .prose-custom strong {
+    @apply text-slate-800 font-medium dark:text-zinc-200;
+  }
+
+  .prose-custom a {
+    @apply text-brand underline decoration-brand/30 underline-offset-2 transition-colors duration-200;
+    @apply hover:text-brand/90 dark:text-accent dark:decoration-accent/30 dark:hover:text-accent-muted;
+  }
+
+  .form-input {
+    @apply w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm;
+    @apply placeholder-slate-400 outline-none transition-all duration-200;
+    @apply focus:border-brand focus:ring-2 focus:ring-brand/15;
+    @apply dark:border-border dark:bg-surface-800/50 dark:text-zinc-200 dark:placeholder-zinc-500;
+    @apply dark:focus:border-accent dark:focus:ring-accent/20;
+  }
+
+  .btn-lift {
+    @apply transition-transform duration-200 ease-out hover:-translate-y-px;
+  }
+
+  .card-glow {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .experience-card {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute left-0 w-full h-px scale-x-0 origin-left transition-transform duration-200 ease-out;
+    @apply bg-brand/80 bottom-[-2px] dark:bg-accent/80;
+  }
+
+  .link-underline:hover::after {
+    @apply scale-x-100;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-px;
+  }
 }
 
-/* Prose for long-form text */
-.prose-custom {
-  @apply text-zinc-400 leading-relaxed;
-}
-
-.prose-custom strong {
-  @apply text-zinc-200 font-medium;
-}
-
-.prose-custom a {
-  @apply text-accent hover:text-accent-muted transition-colors underline underline-offset-2;
-}
-
-/* Button hover lift */
-.btn-lift {
-  @apply transition-transform duration-200 hover:-translate-y-0.5;
-}
-
-/* Subtle section gradient background */
-.section-gradient {
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(34, 211, 238, 0.02) 50%,
-    transparent 100%
-  );
-}
-
-/* Card glow transition */
-.card-glow {
-  @apply transition-all duration-300 ease-out;
-}
-
-/* Experience card hover */
-.experience-card {
-  @apply transition-all duration-300 ease-out;
-}
-
-/* Responsive: ensure touch targets and readable text on small screens */
 @media (max-width: 640px) {
   .section-container {
     padding-left: 1rem;
@@ -100,37 +164,11 @@ body {
   }
 }
 
-/* Link hover underline slide */
-.link-underline {
-  @apply relative inline-block;
-}
-.link-underline::after {
-  content: '';
-  @apply absolute left-0 w-full h-px bg-accent scale-x-0 origin-left transition-transform duration-300;
-  bottom: -2px;
-}
-.link-underline:hover::after {
-  @apply scale-x-100;
-}
-
-/* Card hover lift + glow */
-.card-hover {
-  @apply transition-all duration-300 ease-out;
-}
-.card-hover:hover {
-  @apply -translate-y-0.5;
-}
-
-/* Section title subtle gradient on scroll (optional) */
-.section-title {
-  @apply transition-colors duration-300;
-}
-
-/* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .animate-glow-pulse,
   .animate-float,
-  .animate-shimmer {
+  .animate-shimmer,
+  .animate-gradient-shift {
     animation: none;
   }
   .link-underline::after {
@@ -138,7 +176,6 @@ body {
   }
 }
 
-/* Layout containment for cross-browser */
 main {
   width: 100%;
   min-width: 0;

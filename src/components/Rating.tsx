@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
 
 const RATING_KEY = 'portfolio-rating';
 const STAR_COUNT = 5;
@@ -42,22 +43,17 @@ export default function Rating() {
   const displayStars = hoverStar ?? userRating ?? 0;
 
   return (
-    <section id="rating" className="section-container border-t border-border/50" aria-labelledby="rating-heading">
+    <section id="rating" className="section-container section-rule" aria-labelledby="rating-heading">
       <Reveal>
-        <h2 id="rating-heading" className="text-2xl font-semibold text-white mb-2 font-mono tracking-tight">
-          Focus & proficiency
-        </h2>
-        <p className="text-zinc-500 text-sm mb-4 max-w-xl">
-          High-level expertise across cloud, automation, and platform engineering.
-        </p>
-        <div className="flex flex-wrap items-center gap-6 mb-8">
-          <div className="inline-flex items-baseline gap-1.5">
-            <span className="text-3xl sm:text-4xl font-semibold text-white font-mono tabular-nums">5.4k</span>
-            <span className="text-zinc-500 text-sm">rating</span>
-          </div>
-          {/* User star rating */}
+        <SectionHeader
+          id="rating-heading"
+          title="Focus & proficiency"
+          lead="A concise self-map—useful for scoping fit, not a substitute for a technical conversation."
+          className="mb-6 sm:mb-8"
+        />
+        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-end gap-6 sm:gap-8 mb-8">
           <div className="flex flex-col gap-2">
-            <span className="text-zinc-400 text-sm">Rate my profile</span>
+            <span className="text-subtle text-sm">How useful was this profile?</span>
             <div className="flex gap-1" role="group" aria-label="Rate profile with stars">
               {Array.from({ length: STAR_COUNT }, (_, i) => {
                 const value = i + 1;
@@ -69,12 +65,14 @@ export default function Rating() {
                     onClick={() => handleRate(value)}
                     onMouseEnter={() => setHoverStar(value)}
                     onMouseLeave={() => setHoverStar(null)}
-                    className={`p-0.5 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface-950 transition-transform hover:scale-110 ${filled ? 'text-accent' : 'text-zinc-500'}`}
+                    className={`p-0.5 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-accent/50 dark:focus-visible:ring-offset-canvas transition-transform duration-200 hover:scale-105 ${
+                      filled ? 'text-brand dark:text-accent' : 'text-slate-400 dark:text-zinc-600'
+                    }`}
                     aria-label={`${value} star${value > 1 ? 's' : ''}`}
                     aria-pressed={userRating === value}
                   >
                     <svg
-                      className="w-8 h-8 sm:w-9 sm:h-9 transition-colors"
+                      className="w-7 h-7 sm:w-8 sm:h-8 transition-colors"
                       fill={filled ? 'currentColor' : 'none'}
                       stroke="currentColor"
                       strokeWidth={1.5}
@@ -88,26 +86,24 @@ export default function Rating() {
               })}
             </div>
             {userRating !== null && (
-              <p className="text-accent/90 text-sm font-mono">
-                Thanks! You rated {userRating}/5
-              </p>
+              <p className="text-brand/90 dark:text-accent/90 text-sm font-mono">Thanks—saved as {userRating}/5</p>
             )}
           </div>
         </div>
       </Reveal>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-3xl">
         {areas.map((area, i) => (
-          <Reveal key={area.label} delay={i * 40}>
+          <Reveal key={area.label} delay={i * 30}>
             <div className="flex flex-col gap-1.5">
-              <div className="flex justify-between items-baseline">
-                <span className="text-zinc-300 text-sm font-medium">{area.label}</span>
-                <span className="text-accent/80 text-xs font-mono">
+              <div className="flex justify-between items-baseline gap-2">
+                <span className="text-slate-600 dark:text-zinc-400 text-sm">{area.label}</span>
+                <span className="text-brand/75 dark:text-accent/70 text-xs font-mono tabular-nums">
                   {area.value}/{area.max}
                 </span>
               </div>
-              <div className="h-1.5 rounded-full bg-surface-900 overflow-hidden">
+              <div className="h-1 rounded-full bg-slate-200 dark:bg-surface-800/80 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-accent/70 transition-all duration-700 ease-out"
+                  className="h-full rounded-full bg-brand/45 dark:bg-accent/50 transition-all duration-700 ease-out"
                   style={{ width: `${(area.value / area.max) * 100}%` }}
                 />
               </div>
